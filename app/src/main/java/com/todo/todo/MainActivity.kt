@@ -1,6 +1,7 @@
 package com.todo.todo
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.support.v7.app.AppCompatActivity
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         db?.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values)
     }
 
-    fun getData(view: View) {
+    fun getLastEntry(view: View) {
         val context = applicationContext
         // Access database
         val dbHelper = FeedReaderDbHelper(context)
@@ -75,5 +76,12 @@ class MainActivity : AppCompatActivity() {
         val valueOutputField = view.rootView.findViewById<TextView>(R.id.outputValue)
         keyOutputField.text = itemKey
         valueOutputField.text = itemValue
+    }
+
+    fun getAllData(view: View) {
+        // Create an Intent to start the second activity
+        val dataIntent = Intent(this, SecondActivity::class.java)
+        // Start second activity
+        startActivity(dataIntent)
     }
 }

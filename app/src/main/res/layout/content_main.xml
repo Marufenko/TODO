@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="key"
+        android:hint="@string/key"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,18 +27,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="value"
+        android:hint="@string/value"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputKey" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/putButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Put"
+        android:text="@string/put"
         android:onClick="putData"
         app:layout_constraintStart_toEndOf="@+id/inputKey"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +49,6 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="key"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputValue" />
 
@@ -59,18 +58,28 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="value"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/outputKey" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/getLastButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="88dp"
-        android:text="Get"
-        android:onClick="getData"
+        android:text="@string/get_last_entry"
+        android:onClick="getLastEntry"
         app:layout_constraintStart_toEndOf="@+id/outputKey"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/putButton" />
+
+    <Button
+        android:id="@+id/getAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/get_all_data"
+        android:onClick="getAllData"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/outputValue" />
 </android.support.constraint.ConstraintLayout>
