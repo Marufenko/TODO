@@ -11,19 +11,23 @@ import android.widget.TextView
 
 class SecondActivity : AppCompatActivity() {
 
+    companion object {
+        const val VALUE = "value"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
         val recyclerView: RecyclerView = findViewById(R.id.test_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = Adapter(generateFakeValues())
+        recyclerView.adapter = Adapter(generateValues())
     }
 
-    private fun generateFakeValues(): List<String> {
+    private fun generateValues(): List<String> {
         val values = mutableListOf<String>()
-        for (i in 0..100) {
-            values.add("$i element")
+        for (i in 0..10) {
+            values.add("${intent.getStringExtra(VALUE)} $i")
         }
         return values
     }
