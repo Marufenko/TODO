@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
 
         // Add data from cursor to the extras for the Intent
         dataIntent.putExtra(SecondActivity.VALUE, itemValue)
+        dataIntent.putExtra(SecondActivity.KEY, itemKey)
 
         // Start second activity
         startActivity(dataIntent)

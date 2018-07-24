@@ -13,6 +13,7 @@ class SecondActivity : AppCompatActivity() {
 
     companion object {
         const val VALUE = "value"
+        const val KEY = "key"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,33 +22,31 @@ class SecondActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.test_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = Adapter(generateValues())
+        recyclerView.adapter = Adapter(getData())
     }
 
-    private fun generateValues(): List<String> {
-        val values = mutableListOf<String>()
-        for (i in 0..10) {
-            values.add("${intent.getStringExtra(VALUE)} $i")
-        }
-        return values
-    }
+    private fun getData() = Pair(intent.getStringExtra(VALUE), intent.getStringExtra(KEY))
 
-    class Adapter(private val values: List<String>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+    class Adapter(private val values: Pair<String, String>):
+            RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-        override fun getItemCount() = values.size
+        override fun getItemCount() = 1
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.test_text_view, parent, false)
+                    .inflate(R.layout.recycler_view, parent, false)
             return ViewHolder(itemView)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.textView.text = values[position]
+            val (value, key) = values
+            holder.valueView.text = value
+            holder.keyView.text = key
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            var textView: TextView = itemView.findViewById(R.id.text_list_item)
+            var valueView: TextView = itemView.findViewById(R.id.valueTitle)
+            var keyView: TextView = itemView.findViewById(R.id.keyTitle)
         }
     }
 }
