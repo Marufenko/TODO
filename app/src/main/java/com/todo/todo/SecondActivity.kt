@@ -12,8 +12,7 @@ import android.widget.TextView
 class SecondActivity : AppCompatActivity() {
 
     companion object {
-        const val VALUE = "value"
-        const val KEY = "key"
+        const val DATA = "data"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +24,12 @@ class SecondActivity : AppCompatActivity() {
         recyclerView.adapter = Adapter(getData())
     }
 
-    private fun getData() = Pair(intent.getStringExtra(VALUE), intent.getStringExtra(KEY))
+    private fun getData() = intent.getStringArrayListExtra(DATA)
 
-    class Adapter(private val values: Pair<String, String>):
+    class Adapter(private val values: ArrayList<String>) :
             RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-        override fun getItemCount() = 1
+        override fun getItemCount() = values.size
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
@@ -39,8 +38,7 @@ class SecondActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val (value, key) = values
-            holder.keyView.text = key
+            holder.keyView.text = values[position]
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -69,15 +69,17 @@ class MainActivity : AppCompatActivity() {
         // Access to data within Cursor
         lateinit var itemKey: String
         lateinit var itemValue: String
+        val dataArray = arrayListOf<String>()
         with(cursor) {
-            moveToNext()
-            itemKey = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_KEY))
-            itemValue = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_VALUE))
+            while (moveToNext()) {
+                itemKey = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_KEY))
+                itemValue = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_VALUE))
+                dataArray.add(itemKey)
+            }
         }
 
         // Add data from cursor to the extras for the Intent
-        dataIntent.putExtra(SecondActivity.VALUE, itemValue)
-        dataIntent.putExtra(SecondActivity.KEY, itemKey)
+        dataIntent.putExtra(SecondActivity.DATA, dataArray)
 
         // Start second activity
         startActivity(dataIntent)
