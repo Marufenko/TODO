@@ -20,9 +20,8 @@ class MainActivity : AppCompatActivity() {
 
     fun putData(view: View) {
         val keyInputField = view.rootView.findViewById<EditText>(R.id.inputKey)
-        val valueInputField = view.rootView.findViewById<EditText>(R.id.inputValue)
         val key = keyInputField.text.toString()
-        val value = valueInputField.text.toString()
+        val value = "0" // "0" by default as boolean value which represents not ticked goal
 
         val context = applicationContext
 
@@ -37,45 +36,6 @@ class MainActivity : AppCompatActivity() {
         }
         // Insert the new row
         db?.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values)
-    }
-
-    fun getLastEntry(view: View) {
-        val context = applicationContext
-        // Access database
-        val dbHelper = FeedReaderDbHelper(context)
-        // Gets the data repository in read mode
-        val db = dbHelper.readableDatabase
-        // Define a projection that specifies which columns from the database fun actually use after query
-        val projection = arrayOf(
-                BaseColumns._ID,
-                FeedReaderContract.FeedEntry.COLUMN_KEY,
-                FeedReaderContract.FeedEntry.COLUMN_VALUE
-        )
-        // How you want the results sorted in the resulting Cursor
-        val sortOrder = "${BaseColumns._ID} DESC"
-        val cursor = db.query(
-                FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
-                projection,                  // The array of columns to return (pass null to get all)
-                null,               // no WHERE statement
-                null,            // no values for WHERE statement
-                null,               // don't group the rows
-                null,                // don't filter by row groups
-                sortOrder                   // The sort order
-        )
-
-        // Access to data within Cursor
-        lateinit var itemKey: String
-        lateinit var itemValue: String
-        with(cursor) {
-            moveToNext()
-            itemKey = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_KEY))
-            itemValue = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_VALUE))
-        }
-
-        val keyOutputField = view.rootView.findViewById<TextView>(R.id.outputKey)
-        val valueOutputField = view.rootView.findViewById<TextView>(R.id.outputValue)
-        keyOutputField.text = itemKey
-        valueOutputField.text = itemValue
     }
 
     fun getAllData(view: View) {

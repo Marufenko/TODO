@@ -40,13 +40,11 @@ class SecondActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val (value, key) = values
-            holder.valueView.text = value
             holder.keyView.text = key
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            var valueView: TextView = itemView.findViewById(R.id.valueTitle)
-            var keyView: TextView = itemView.findViewById(R.id.keyTitle)
+            var keyView: TextView = itemView.findViewById(R.id.checkBox)
         }
     }
 }
