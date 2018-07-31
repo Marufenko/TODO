@@ -69,12 +69,12 @@ class MainActivity : AppCompatActivity() {
         // Access to data within Cursor
         lateinit var itemKey: String
         lateinit var itemValue: String
-        val dataArray = arrayListOf<String>()
+        val dataArray = arrayListOf<Goal>()
         with(cursor) {
             while (moveToNext()) {
                 itemKey = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_KEY))
                 itemValue = getString(getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_VALUE))
-                dataArray.add(itemKey)
+                dataArray.add(Goal(itemKey, itemValue))
             }
         }
 

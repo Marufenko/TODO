@@ -24,9 +24,9 @@ class SecondActivity : AppCompatActivity() {
         recyclerView.adapter = Adapter(getData())
     }
 
-    private fun getData() = intent.getStringArrayListExtra(DATA)
+    private fun getData() = intent.getParcelableArrayListExtra<Goal>(DATA)
 
-    class Adapter(private val values: ArrayList<String>) :
+    class Adapter(private val values: ArrayList<Goal>) :
             RecyclerView.Adapter<Adapter.ViewHolder>() {
 
         override fun getItemCount() = values.size
@@ -38,7 +38,7 @@ class SecondActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.keyView.text = values[position]
+            holder.keyView.text = values[position].key
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
