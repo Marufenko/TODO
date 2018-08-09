@@ -1,5 +1,7 @@
 package com.todo.todo
 
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +12,9 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.Toast
 import android.widget.CompoundButton
+import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+import android.support.v4.content.ContextCompat
 
 
 class SecondActivity : AppCompatActivity() {
@@ -51,8 +56,9 @@ class SecondActivity : AppCompatActivity() {
 
             //simple onClick action for checkBox
             holder.checkBox.setOnCheckedChangeListener(
-                    CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-                        holder.checkBox.text = "ticked"
+                    { _, _ ->
+                        holder.checkBox.paintFlags = holder.checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                        holder.checkBox.setTextColor(Color.parseColor("#898989"))
                     })
         }
 
