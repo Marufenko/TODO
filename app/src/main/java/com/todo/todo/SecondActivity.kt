@@ -10,12 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.Toast
-import android.widget.CompoundButton
-import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
-import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
-import android.support.v4.content.ContextCompat
-
 
 class SecondActivity : AppCompatActivity() {
 
@@ -24,6 +18,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
@@ -47,14 +42,18 @@ class SecondActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.checkBox.text = values[position].key
+            // Handler for goal status
+            if (values[position].value == "0") {
+                holder.checkBox.isChecked = false
+                holder.checkBox.paintFlags = holder.checkBox.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                holder.checkBox.setTextColor(Color.parseColor("#000000"))
+            } else {
+                holder.checkBox.isChecked = true
+                holder.checkBox.paintFlags = holder.checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                holder.checkBox.setTextColor(Color.parseColor("#898989"))
+            }
 
-            //in some cases, it will prevent unwanted situations
-            holder.checkBox.setOnCheckedChangeListener(null)
-
-            //if true, your checkbox will be selected, else unselected
-            holder.checkBox.isChecked = false
-
-            //simple onClick action for checkBox
+            // Handler for onClick actions for checkBox
             holder.checkBox.setOnCheckedChangeListener(
                     { _, _ ->
                         holder.checkBox.paintFlags = holder.checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

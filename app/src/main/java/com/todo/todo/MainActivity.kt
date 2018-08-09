@@ -13,12 +13,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
     }
 
     fun putData(view: View) {
+
         val keyInputField = view.rootView.findViewById<EditText>(R.id.inputKey)
         val key = keyInputField.text.toString()
         val value = "0" // "0" by default as boolean value which represents not ticked goal
@@ -34,11 +36,12 @@ class MainActivity : AppCompatActivity() {
             put(FeedReaderContract.FeedEntry.COLUMN_KEY, key)
             put(FeedReaderContract.FeedEntry.COLUMN_VALUE, value)
         }
-        // Insert the new row
+        // Insert new entry to db
         db?.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values)
     }
 
     fun getAllData(view: View) {
+
         // Create an Intent to start the second activity
         val dataIntent = Intent(this, SecondActivity::class.java)
 
@@ -54,16 +57,16 @@ class MainActivity : AppCompatActivity() {
                 FeedReaderContract.FeedEntry.COLUMN_KEY,
                 FeedReaderContract.FeedEntry.COLUMN_VALUE
         )
-        // How you want the results sorted in the resulting Cursor
+        // Sort results in Cursor
         val sortOrder = "${BaseColumns._ID} DESC"
         val cursor = db.query(
-                FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
-                projection,                  // The array of columns to return (pass null to get all)
-                null,               // no WHERE statement
-                null,            // no values for WHERE statement
-                null,               // don't group the rows
-                null,                // don't filter by row groups
-                sortOrder                   // The sort order
+                FeedReaderContract.FeedEntry.TABLE_NAME, // The table to query
+                projection, // The array of columns to return (pass null to get all)
+                null, // no WHERE statement
+                null, // no values for WHERE statement
+                null, // don't group the rows
+                null, // don't filter by row groups
+                sortOrder // The sort order
         )
 
         // Access to data within Cursor
