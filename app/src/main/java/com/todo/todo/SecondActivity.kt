@@ -7,7 +7,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.CheckBox
+import android.widget.Toast
+import android.widget.CompoundButton
+
 
 class SecondActivity : AppCompatActivity() {
 
@@ -38,11 +41,23 @@ class SecondActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.keyView.text = values[position].key
+            holder.checkBox.text = values[position].key
+
+            //in some cases, it will prevent unwanted situations
+            holder.checkBox.setOnCheckedChangeListener(null)
+
+            //if true, your checkbox will be selected, else unselected
+            holder.checkBox.isChecked = false
+
+            //simple onClick action for checkBox
+            holder.checkBox.setOnCheckedChangeListener(
+                    CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+                        holder.checkBox.text = "ticked"
+                    })
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            var keyView: TextView = itemView.findViewById(R.id.checkBox)
+            var checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
         }
     }
 }
