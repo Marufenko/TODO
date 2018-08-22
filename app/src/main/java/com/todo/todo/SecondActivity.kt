@@ -24,7 +24,8 @@ class SecondActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.test_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = Adapter(getData())
+        val dataSet = getData()
+        recyclerView.adapter = Adapter(dataSet)
     }
 
     private fun getData() = intent.getParcelableArrayListExtra<Goal>(DATA)
@@ -58,6 +59,7 @@ class SecondActivity : AppCompatActivity() {
                     { _, _ ->
                         holder.checkBox.paintFlags = holder.checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                         holder.checkBox.setTextColor(Color.parseColor("#898989"))
+                        values[position].value = "1"
                     })
         }
 
