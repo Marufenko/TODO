@@ -42,6 +42,10 @@ class SecondActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+            // set to NULL to avoid inheritance of status of previous used data for
+            holder.checkBox.setOnCheckedChangeListener(null)
+
             holder.checkBox.text = values[position].key
             // Handler for goal status
             if (values[position].value == "0") {
