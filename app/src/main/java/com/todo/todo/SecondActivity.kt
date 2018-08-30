@@ -61,9 +61,15 @@ class SecondActivity : AppCompatActivity() {
             // Handler for onClick actions for checkBox
             holder.checkBox.setOnCheckedChangeListener(
                     { _, _ ->
-                        holder.checkBox.paintFlags = holder.checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                        holder.checkBox.setTextColor(Color.parseColor("#898989"))
-                        values[position].value = "1"
+                        if (holder.checkBox.isChecked) {
+                            holder.checkBox.paintFlags = holder.checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                            holder.checkBox.setTextColor(Color.parseColor("#898989"))
+                            values[position].value = "1"
+                        } else {
+                            holder.checkBox.paintFlags = holder.checkBox.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                            holder.checkBox.setTextColor(Color.parseColor("#000000"))
+                            values[position].value = "0"
+                        }
                     })
         }
 
