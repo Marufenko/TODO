@@ -1,5 +1,6 @@
 package com.todo.todo
 
+import android.content.ContentValues
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
@@ -69,6 +70,26 @@ class SecondActivity : AppCompatActivity() {
                             holder.checkBox.setTextColor(Color.parseColor("#000000"))
                             values[position].value = "0"
                         }
+
+                        // Write new value to database
+                        val context = MyApplication.appContext
+                        // Access database
+                        val dbHelper = FeedReaderDbHelper(context)
+                        // Gets the data repository in write mode
+                        val db = dbHelper.writableDatabase
+                        // New value for one column
+                        val key = values[position].key
+                        val newValue = values[position].value
+                        val update = ContentValues().apply {
+                            put(FeedReaderContract.FeedEntry.COLUMN_VALUE, newValue)
+                        }
+                        // Which row to update, based on the key
+                        val selection = "${FeedReaderContract.FeedEntry.COLUMN_KEY} = '$key'"
+                        db.update(
+                                FeedReaderContract.FeedEntry.TABLE_NAME,
+                                update,
+                                selection,
+                                null)
                     })
         }
 
