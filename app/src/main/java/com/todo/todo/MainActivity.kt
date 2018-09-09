@@ -7,8 +7,10 @@ import android.provider.BaseColumns
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
+import com.todo.todo.dailog.MyDialogFragment
 import kotlinx.android.synthetic.main.activity_main.*
+
+private const val TAG_ADD_GOAL = "add goal"
 
 class MainActivity : AppCompatActivity() {
 
@@ -86,5 +88,13 @@ class MainActivity : AppCompatActivity() {
 
         // Start second activity
         startActivity(dataIntent)
+    }
+
+    fun showAddGoalDialog(view: View) {
+        MyDialogFragment.show(
+                supportFragmentManager = supportFragmentManager,
+                tag = TAG_ADD_GOAL,
+                dialogTitle = "New goal"
+        )
     }
 }
